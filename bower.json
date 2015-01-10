@@ -17,5 +17,8 @@
   },
   "resolutions": {
     "firebase": "2.1.x"
+  },
+  "devDependencies": {
+    "lodash": "~2.4.1"
   }
 }

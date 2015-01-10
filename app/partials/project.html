@@ -6,7 +6,7 @@
 </form>
 
 <ul id="projects" ng-show="projects.length">
-    <li ng-repeat="project in projects">{{project.name}}</li>
+    <li ng-repeat="project in projects"><a ng-href="#project/{{project.id}}">{{project.name}}</a></li>
 </ul>
 
 <p>
