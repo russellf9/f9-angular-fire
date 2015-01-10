@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('myApp', [
+var myApp =  angular.module('myApp', [
     'myApp.config',
     'myApp.controllers',
     'myApp.decorators',

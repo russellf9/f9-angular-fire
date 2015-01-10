@@ -20,6 +20,10 @@ angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
       templateUrl: 'partials/chat.html',
       controller: 'ChatCtrl'
     },
+    '/project': {
+        templateUrl: 'partials/project.html',
+        controller: 'ProjectCtrl'
+    },
     '/login': {
       templateUrl: 'partials/login.html',
       controller: 'LoginCtrl'
