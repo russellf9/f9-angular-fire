@@ -2,7 +2,7 @@
 
 <form>
     <input placeholder="New Project name..." ng-model="newProject">
-    <button type="submit" ng-click="addProject(newMessage); newProject = null;">create</button>
+    <button type="submit" ng-click="addProject(newProject); newProject = null;">create</button>
 </form>
 
 <ul id="projects" ng-show="projects.length">

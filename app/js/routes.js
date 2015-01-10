@@ -24,6 +24,10 @@ angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
         templateUrl: 'partials/project.html',
         controller: 'ProjectCtrl'
     },
+    '/project/:id': {
+        templateUrl: 'partials/edit.html',
+        controller: 'ProjectEditCtrl'
+    },
     '/login': {
       templateUrl: 'partials/login.html',
       controller: 'LoginCtrl'

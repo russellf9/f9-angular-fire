@@ -1,6 +1,17 @@
 'use strict';
 
 
-myAppControllers.controller('ProjectCtrl', ['$scope', 'messageList', function($scope, messageList) {
-    console.log('hi from the project controller!')
+myAppControllers.controller('ProjectCtrl', ['$scope', 'projectList', 'dataSVC', function ($scope, projectList, dataSVC) {
+    console.log('hi from the project controller!');
+
+    $scope.projects = projectList;
+
+    $scope.addProject = function (name) {
+        if (name) {
+            //$scope.projects.$add({name: name});
+            console.log('addProject: ',name);
+            dataSVC.addProject(name);
+        }
+    }
+
 }]);
