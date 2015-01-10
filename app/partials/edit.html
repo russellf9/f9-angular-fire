@@ -3,4 +3,11 @@
 
 <div id="project" ng-show="project">
     <h3>{{project.name}}</h3>
+
+    <form>
+        <input placeholder="New Project name..." ng-model="newName">
+        <button type="submit" ng-click="setName(newName); newName = null;">set</button>
+    </form>
 </div>
+
+
