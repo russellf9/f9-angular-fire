@@ -14,6 +14,10 @@
 
     .factory('projectList', ['fbutil', function(fbutil) {
         return fbutil.syncArray('projects', {limit: 10, endAt: null});
+    }])
+       // TODO is there a way of using a `single` project Service?
+    .factory('project', ['fbutil', function(fbutil) {
+        return fbutil.syncArray('projects', {limit: 10, endAt: null});
     }]);
 
 })();

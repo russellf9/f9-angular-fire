@@ -9,8 +9,16 @@ myAppControllers.controller('ProjectEditCtrl', ['$scope', '$routeParams', 'proje
     var projectId = $routeParams.id;
 
     // use a $promise to get the unique project
-    var project = dataSVC.getProject(projectId).then(function(data){
+    dataSVC.getProject(projectId).then(function(data){
         $scope.project = data;
         console.log('ok project: ',$scope.project );
     });
+
+    $scope.setName = function(newName) {
+        if (!$scope.project) {
+            return;
+        }
+        dataSVC.setName(projectId, newName);
+
+    };
 }]);

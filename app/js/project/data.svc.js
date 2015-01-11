@@ -1,7 +1,9 @@
 'use strict';
 
 myApp.factory('dataSVC', ['$q', 'fbutil', 'projectList', '_', function ($q, fbutil, projectList, _) {
-    var projects = projectList;
+    var projects = projectList,
+        currentProject,
+        currentProjectRef;
     return {
         addProject: function (name) {
             projects.$add({name: name}).then(function (ref) {
@@ -17,9 +19,13 @@ myApp.factory('dataSVC', ['$q', 'fbutil', 'projectList', '_', function ($q, fbut
         },
         getProject: function (projectId) {
             var deferred = $q.defer();
-            projectList.$loaded().then(function(data) {
+            projectList.$loaded().then(function (data) {
                 projects = data;
-                var project = _.where(projects, {id:projectId})[0];
+                var project = _.where(projects, {id: projectId})[0];
+
+                currentProject = project;
+
+                console.log('project: ', currentProject);
                 if (project) {
                     deferred.resolve(project);
                 }
@@ -27,6 +33,18 @@ myApp.factory('dataSVC', ['$q', 'fbutil', 'projectList', '_', function ($q, fbut
                 // reject(error);
             });
             return deferred.promise
+        },
+        setName: function (projectId, newName) {
+            console.log('We have project: ', currentProject.id);
+            //currentProject.$set('name', newName);
+
+            if (currentProject.id === projectId) {
+                var currentProjectRef = fbutil.ref('projects/' + projectId);
+
+                var currentProjectSync = fbutil.syncObjectReference(currentProjectRef);
+
+                currentProjectSync.$set('name', newName);
+            }
         }
     };
 }]);
