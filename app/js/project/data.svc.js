@@ -36,14 +36,14 @@ myApp.factory('dataSVC', ['$q', 'fbutil', 'projectList', '_', function ($q, fbut
         },
         setName: function (projectId, newName) {
             console.log('We have project: ', currentProject.id);
-            //currentProject.$set('name', newName);
-
             if (currentProject.id === projectId) {
                 var currentProjectRef = fbutil.ref('projects/' + projectId);
 
                 var currentProjectSync = fbutil.syncObjectReference(currentProjectRef);
 
                 currentProjectSync.$set('name', newName);
+
+                currentProjectSync.$update('days', {two: 'tuesday'});
             }
         }
     };
