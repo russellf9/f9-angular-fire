@@ -8,6 +8,16 @@
         <input placeholder="New Project name..." ng-model="newName">
         <button type="submit" ng-click="setName(newName); newName = null;">set</button>
     </form>
+
+    <form style="margin-top: 20px;">
+        <input placeholder="Add new friend..." ng-model="friend">
+        <button type="submit" ng-click="addFriend(project.id, friend); friends = null;">add</button>
+    </form>
+
+    <form ng-repeat="friend in project.friends" style="margin-top: 20px;">
+        <span><label style="display: inline">{{friend.name}}</label></span>
+        <span><button style="display: inline" type="submit" ng-click="removeFriend(project.id, $index);">remove</button></span>
+    </form>
 </div>
 
 

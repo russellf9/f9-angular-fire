@@ -19,6 +19,16 @@ myAppControllers.controller('ProjectEditCtrl', ['$scope', '$routeParams', 'proje
             return;
         }
         dataSVC.setName(projectId, newName);
+    };
 
+    $scope.addFriend = function(projectId, name) {
+        if(name) {
+            dataSVC.addFriend(projectId, name);
+        }
+    };
+
+    $scope.removeFriend = function(projectId, index) {
+        console.log('removeFriend: ', arguments)
+        dataSVC.removeFriend(projectId, index);
     };
 }]);
