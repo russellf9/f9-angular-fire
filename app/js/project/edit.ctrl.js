@@ -27,8 +27,24 @@ myAppControllers.controller('ProjectEditCtrl', ['$scope', '$routeParams', 'proje
         }
     };
 
+    /**
+     * Use the controller to add multiple items
+     * @param projectId
+     * @param names
+     */
+    $scope.addFriends_Controller = function(projectId, names) {
+        _.forEach(names, function(name, key){
+            if (name) {
+                $scope.addFriend(projectId, name);
+            }
+        })
+    };
+
+    $scope.addFriends = function(projectId, names) {
+        dataSVC.addFriends(projectId, names);
+    };
+
     $scope.removeFriend = function(projectId, index) {
-        console.log('removeFriend: ', arguments)
         dataSVC.removeFriend(projectId, index);
     };
 }]);

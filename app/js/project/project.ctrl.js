@@ -17,5 +17,4 @@ myAppControllers.controller('ProjectCtrl', ['$scope', 'projectList', 'dataSVC', 
     };
 
 
-
 }]);

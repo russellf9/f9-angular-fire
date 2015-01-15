@@ -10,9 +10,21 @@
     </form>
 
     <form style="margin-top: 20px;">
-        <input placeholder="Add new friend..." ng-model="friend">
-        <button type="submit" ng-click="addFriend(project.id, friend); friends = null;">add</button>
+        <input placeholder="Add new friend..." ng-model="friendA">
+        <button type="submit" ng-click="addFriend(project.id, friendA); friendA = null;">add</button>
     </form>
+
+    <form style="margin-top: 10px;">
+        <input placeholder="Add new friend..." ng-model="friendB">
+        <button type="submit" ng-click="addFriend(project.id, friendB); friendB = null;">add</button>
+    </form>
+
+    <form style="margin-top: 10px;">
+        <label style="display: inline; min-width: 210px;">Multiple friends</label>
+        <button type="submit" ng-click="addFriends(project.id, [friendA, friendB]); friendA = null; friendB = null;">add</button>
+    </form>
+
+
 
     <form ng-repeat="friend in project.friends" style="margin-top: 20px;">
         <span><label style="display: inline">{{friend.name}}</label></span>

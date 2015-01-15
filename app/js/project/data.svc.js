@@ -37,9 +37,8 @@ myApp.factory('dataSVC', ['$q', 'fbutil', 'projectList', '_', function ($q, fbut
         setName: function (projectId, newName) {
             console.log('We have project: ', currentProject.id);
             if (currentProject.id === projectId) {
-                var currentProjectRef = fbutil.ref('projects/' + projectId);
-
-                var currentProjectSync = fbutil.syncObjectReference(currentProjectRef);
+                var currentProjectRef = fbutil.ref('projects/' + projectId),
+                    currentProjectSync = fbutil.syncObjectReference(currentProjectRef);
 
                 currentProjectSync.$set('name', newName);
 
@@ -47,27 +46,56 @@ myApp.factory('dataSVC', ['$q', 'fbutil', 'projectList', '_', function ($q, fbut
             }
         },
         addFriend : function(projectId, name) {
-
-            console.log(projectId, ' | Add friend: ', name);
-
+            console.log('\n*** addFriend: ', projectId, ' | Add friend: ', name);
             if(projects) {
+                var projectFriendsRef = fbutil.ref('projects/' + projectId + '/friends'),
+                    projectFriendsSync = fbutil.syncObjectReference(projectFriendsRef),
+                    list = projectFriendsSync.$asArray();
 
-                var projectFriendsRef = fbutil.ref('projects/' + projectId + '/friends');
-
-                var projectFriendsSync = fbutil.syncObjectReference(projectFriendsRef);
-
-                console.log('projectFriendsSync: ', projectFriendsSync);
-
-                var list = projectFriendsSync.$asArray();
                 list.$loaded().then(function() {
-                    console.log("list has " + list.length + " item(s)");
-
                     list.$add({ name: name }).then(function(result) {
                         console.log("list added " + result);
+                    },function(error) {
+                        console.log("Error:", error);
                     });
                 });
+            }
+        },
+        addItem : function(collecion, data, array, callback) {
+            collecion.$add(data).then(function(result) {
+                console.log("list added " + result);
+                callback(array);
+            },function(error) {
+                console.log("Error:", error);
+            });
 
+        },
+        /**
+         * Adds a collection of friends
+         * @param projectId
+         * @param names
+         */
+        addFriends : function(projectId, names) {
 
+            console.log('\n*** addFriends: ', projectId, ' | Add friends: ', names);
+
+            var addFirstItem = function(array) {
+                var item = array.shift();
+                if(item) {
+                    self.addItem(list, item, array, addFirstItem);
+                }
+            };
+
+            var self = this;
+
+            if(projects) {
+                var projectFriendsRef = fbutil.ref('projects/' + projectId + '/friends'),
+                    projectFriendsSync = fbutil.syncObjectReference(projectFriendsRef),
+                    list = projectFriendsSync.$asArray();
+
+                list.$loaded().then(function() {
+                    addFirstItem(names);
+                });
             }
         },
         removeFriend: function(projectId, index) {
