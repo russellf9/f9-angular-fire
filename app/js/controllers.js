@@ -49,11 +49,9 @@ var myAppControllers = angular.module('myApp.controllers', ['firebase.utils', 's
         function assertValidAccountProps() {
             if (!$scope.email) {
                 $scope.err = 'Please enter an email address';
-            }
-            else if (!$scope.pass || !$scope.confirm) {
+            } else if (!$scope.pass || !$scope.confirm) {
                 $scope.err = 'Please enter a password';
-            }
-            else if ($scope.createMode && $scope.pass !== $scope.confirm) {
+            } else if ($scope.createMode && $scope.pass !== $scope.confirm) {
                 $scope.err = 'Passwords do not match';
             }
             return !$scope.err;
@@ -81,11 +79,9 @@ var myAppControllers = angular.module('myApp.controllers', ['firebase.utils', 's
                 resetMessages();
                 if (!pass || !confirm || !newPass) {
                     $scope.err = 'Please fill in all password fields';
-                }
-                else if (newPass !== confirm) {
+                } else if (newPass !== confirm) {
                     $scope.err = 'New pass and confirm do not match';
-                }
-                else {
+                } else {
                     simpleLogin.changePassword(profile.email, pass, newPass)
                         .then(function() {
                             $scope.msg = 'Password changed';

@@ -44,8 +44,7 @@ angular.module('changeEmail', ['firebase.utils'])
                         var dat = snap.val();
                         if (dat === null) {
                             def.reject(oldEmail + ' not found');
-                        }
-                        else {
+                        } else {
                             ctx.old.name = dat.name;
                             def.resolve();
                         }

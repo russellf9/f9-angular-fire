@@ -73,8 +73,7 @@ angular.module('myApp.routes', ['ngRoute', 'simpleLogin'])
                 // the user is not authenticated or fulfills with the user object
                 // on success (the user object is then available to dependency injection)
                 $routeProvider.whenAuthenticated(path, route);
-            }
-            else {
+            } else {
                 // all other routes are added normally
                 $routeProvider.when(path, route);
             }
