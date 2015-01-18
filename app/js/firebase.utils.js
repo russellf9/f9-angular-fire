@@ -1,20 +1,20 @@
 // a simple wrapper on Firebase and AngularFire to simplify deps and keep things DRY
 angular.module('firebase.utils', ['firebase', 'myApp.config'])
-    .factory('fbutil', ['$window', 'FBURL', '$firebase', function ($window, FBURL, $firebase) {
-        "use strict";
+    .factory('fbutil', ['$window', 'FBURL', '$firebase', function($window, FBURL, $firebase) {
+        'use strict';
 
         return {
-            syncObject: function (path, factoryConfig) {
+            syncObject: function(path, factoryConfig) {
                 return syncData.apply(null, arguments).$asObject();
             },
 
-            syncArray: function (path, factoryConfig) {
+            syncArray: function(path, factoryConfig) {
                 return syncData.apply(null, arguments).$asArray();
             },
 
             ref: firebaseRef,
 
-            syncObjectReference: function (value) {
+            syncObjectReference: function(value) {
                 var ref = this.ref(value.path.toString());
                 return $firebase(ref);
             }
@@ -24,8 +24,7 @@ angular.module('firebase.utils', ['firebase', 'myApp.config'])
             for (var i = 0; i < args.length; i++) {
                 if (angular.isArray(args[i])) {
                     args[i] = pathRef(args[i]);
-                }
-                else if (typeof args[i] !== 'string') {
+                } else if (typeof args[i] !== 'string') {
                     throw new Error('Argument ' + i + ' to firebaseRef is not a string: ' + args[i]);
                 }
             }
@@ -46,8 +45,8 @@ angular.module('firebase.utils', ['firebase', 'myApp.config'])
          * @return a Firebase instance
          */
         function firebaseRef(path) {
-            var ref = new $window.Firebase(FBURL);
-            var args = Array.prototype.slice.call(arguments);
+            var ref = new $window.Firebase(FBURL),
+                args = Array.prototype.slice.call(arguments);
             if (args.length) {
                 ref = ref.child(pathRef(args));
             }
@@ -79,7 +78,7 @@ angular.module('firebase.utils', ['firebase', 'myApp.config'])
         function syncData(path, props) {
             var ref = firebaseRef(path);
             props = angular.extend({}, props);
-            angular.forEach(['limit', 'startAt', 'endAt'], function (k) {
+            angular.forEach(['limit', 'startAt', 'endAt'], function(k) {
                 if (props.hasOwnProperty(k)) {
                     var v = props[k];
                     ref = ref[k].apply(ref, angular.isArray(v) ? v : [v]);

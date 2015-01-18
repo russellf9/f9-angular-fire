@@ -1,7 +1,7 @@
 'use strict';
 
 
-myAppControllers.controller('ProjectEditCtrl', ['$scope', '$routeParams', 'projectList', 'dataSVC', '_', function ($scope, $routeParams, projectList, dataSVC, _) {
+myAppControllers.controller('ProjectEditCtrl', ['$scope', '$routeParams', 'projectList', 'dataSVC', '_', function($scope, $routeParams, projectList, dataSVC, _) {
     console.log('hi from the project edit controller! - id- ', $routeParams.id);
 
     console.log('projectList: ', projectList);
@@ -9,9 +9,9 @@ myAppControllers.controller('ProjectEditCtrl', ['$scope', '$routeParams', 'proje
     var projectId = $routeParams.id;
 
     // use a $promise to get the unique project
-    dataSVC.getProject(projectId).then(function(data){
+    dataSVC.getProject(projectId).then(function(data) {
         $scope.project = data;
-        console.log('ok project: ',$scope.project );
+        console.log('ok project: ', $scope.project);
     });
 
     $scope.setName = function(newName) {
@@ -22,7 +22,7 @@ myAppControllers.controller('ProjectEditCtrl', ['$scope', '$routeParams', 'proje
     };
 
     $scope.addFriend = function(projectId, name) {
-        if(name) {
+        if (name) {
             dataSVC.addFriend(projectId, name);
         }
     };
@@ -33,7 +33,7 @@ myAppControllers.controller('ProjectEditCtrl', ['$scope', '$routeParams', 'proje
      * @param names
      */
     $scope.addFriends_Controller = function(projectId, names) {
-        _.forEach(names, function(name, key){
+        _.forEach(names, function(name, key) {
             if (name) {
                 $scope.addFriend(projectId, name);
             }
